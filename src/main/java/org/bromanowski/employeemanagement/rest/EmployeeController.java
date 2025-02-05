@@ -27,28 +27,26 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public Employee getSingleEmployee(@PathVariable int id) {
-        return employeeService.findById(id);
+        return employeeService
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "No employee with id " + id));
     }
 
     @PostMapping
     Employee addEmployee(@RequestBody Employee employee) {
-        employee.setId(0);
+        employee.setId(null);
         return employeeService.save(employee);
     }
 
     @PutMapping()
     Employee editEmployee(@RequestBody Employee employee) {
-        int id = employee.getId();
-        if (employeeService.findById(id) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee with id: " + id);
-        }
-
         return employeeService.save(employee);
     }
 
     @DeleteMapping("/{id}")
     public String deleteEmployee(@PathVariable int id) {
-        if (employeeService.findById(id) == null) {
+        if (employeeService.findById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee with id " + id);
         }
         employeeService.deleteById(id);
