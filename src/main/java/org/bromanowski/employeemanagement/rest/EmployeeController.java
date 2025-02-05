@@ -1,7 +1,7 @@
 package org.bromanowski.employeemanagement.rest;
 
-import org.bromanowski.employeemanagement.dao.EmployeeDAO;
 import org.bromanowski.employeemanagement.entity.Employee;
+import org.bromanowski.employeemanagement.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,15 +13,15 @@ import java.util.List;
 @RequestMapping("/api")
 public class EmployeeController {
 
-    private EmployeeDAO employeeDAO;
+    private final EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(EmployeeDAO employeeDAO) {
-        this.employeeDAO = employeeDAO;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
-        return employeeDAO.findAll();
+        return employeeService.findAll();
     }
 }
