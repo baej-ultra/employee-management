@@ -1,4 +1,4 @@
-package org.bromanowski.employeemanagement.dao;
+package org.bromanowski.employeemanagement.dao.old;
 
 import org.bromanowski.employeemanagement.entity.Employee;
 

@@ -1,4 +1,4 @@
-package org.bromanowski.employeemanagement.dao;
+package org.bromanowski.employeemanagement.dao.old;
 
 import jakarta.persistence.EntityManager;
 import org.bromanowski.employeemanagement.entity.Employee;
